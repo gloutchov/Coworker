@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coworker - Guida (IT)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .help-shell {
+      min-height: 100vh;
+    }
+
+    .help-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 1.5rem 2rem;
+      overflow: auto;
+    }
+
+    .help-hero {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-hero h1 {
+      margin: 0 0 0.35rem 0;
+      font-size: 1.6rem;
+    }
+
+    .help-hero p {
+      margin: 0.25rem 0 0;
+      color: var(--text-muted);
+    }
+
+    .help-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-search {
+      flex: 1 1 260px;
+      min-width: 220px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.6rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .help-search:focus {
+      outline: none;
+      border-color: var(--cowork-blue);
+      box-shadow: 0 0 0 1px rgba(31, 79, 209, 0.15);
+    }
+
+    .help-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 260px) 1fr;
+      gap: 1rem;
+    }
+
+    .help-toc {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.9rem;
+      height: fit-content;
+      position: sticky;
+      top: 0.75rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-toc h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .help-toc a {
+      display: block;
+      color: var(--cowork-blue-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.2rem 0;
+    }
+
+    .help-toc a:hover {
+      text-decoration: underline;
+    }
+
+    .help-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .help-section {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-section h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .help-section h3 {
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .help-section ul,
+    .help-section ol {
+      padding-left: 1.1rem;
+    }
+
+    .help-section li {
+      margin: 0.25rem 0;
+    }
+
+    .help-section.hidden {
+      display: none;
+    }
+
+    .help-footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 1rem 0 0.5rem;
+    }
+
+    @media (max-width: 980px) {
+      .help-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .help-toc {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell help-shell">
+    <header class="app-header">
+      <div class="header-left">
+        <img src="../logo.jpg" alt="Logo Coworker" class="app-logo" />
+        <span class="app-title">Coworker</span>
+      </div>
+      <div class="header-right">
+        <span class="app-version">Guida Utente</span>
+      </div>
+    </header>
+
+    <main class="help-main">
+      <section class="help-hero">
+        <h1>Manuale Utente (IT)</h1>
+        <p>Documento derivato da README.md. Immagini escluse per motivi di brandizzazione.</p>
+      </section>
+
+      <section class="help-toolbar">
+        <input id="help-search" class="help-search" type="search" placeholder="Cerca nel manuale..." aria-label="Cerca nel manuale" />
+        <button id="help-search-clear" class="secondary-btn" type="button">Pulisci</button>
+        <span id="help-search-count" class="status-text"></span>
+      </section>
+
+      <div class="help-layout">
+        <nav class="help-toc">
+          <h3>Indice</h3>
+          <a href="#introduzione">Introduzione</a>
+          <a href="#come-iniziare">Come iniziare</a>
+          <a href="#interfaccia">L'interfaccia</a>
+          <a href="#come-funziona">Come funziona</a>
+          <a href="#configurazione">Configurazione</a>
+          <a href="#cambio-lingua">Cambio di lingua</a>
+          <a href="#manuale">Questo manuale</a>
+          <a href="#appendice">Appendice</a>
+        </nav>
+
+        <div class="help-content" id="help-content">
+          <section id="introduzione" class="help-section">
+            <h2>Introduzione</h2>
+            <p>Coworker e' un progetto sperimentale pensato per offrire un companion AI locale a chi lavora al computer. Il sistema utilizza LLM locali Open Weight, calibrati per le prestazioni di normali portatili da ufficio, e fornisce strumenti di supporto alle attivita quotidiane.</p>
+            <p>Funzionalita principali:</p>
+            <ul>
+              <li>Attivita di brainstorming (con o senza ragionamento).</li>
+              <li>Ricerca informazioni basata su:
+                <ul>
+                  <li>knowledge base del modello,</li>
+                  <li>archivio di documenti locali,</li>
+                  <li>conversazioni precedenti.</li>
+                </ul>
+              </li>
+              <li>Trascrizione di documenti audio o conversazioni live.</li>
+              <li>Creazione di organigrammi, diagrammi di flusso e mappe mentali a partire da chat o documenti locali.</li>
+              <li>Utilizzo di strumenti MCP (a discrezione dell'utente).</li>
+            </ul>
+            <p>Il sistema e' progettato per tutelare la privacy aziendale, evitando la condivisione di informazioni verso server di terze parti, e funziona esclusivamente sul sistema locale dell'utente.</p>
+          </section>
+
+          <section id="come-iniziare" class="help-section">
+            <h2>Come iniziare</h2>
+            <h3>Avvio di Coworker</h3>
+            <p>Per avviare il programma:</p>
+            <ol>
+              <li>Fare doppio click su <code>coworker.bat</code>.</li>
+              <li>Si aprira una finestra terminale che carica il server locale.</li>
+              <li>Si aprira l'interfaccia in una finestra del browser (inizialmente in standby).</li>
+            </ol>
+            <p>Su macOS e' possibile avviare l'app facendo doppio click su <code>coworker.command</code>.</p>
+            <p>All'avvio il server rileva l'hardware e imposta parametri utili alla fluidita dell'interfaccia (finestra di contesto e numero massimo di token). Inoltre inizializza il database per RAG e preferenze locali.</p>
+            <p>Nota: su sistemi poco performanti potrebbe essere necessario ricaricare la pagina per visualizzare eventuali chat salvate.</p>
+            <p>Attenzione: la finestra del terminale puo' essere ridotta a icona, ma non deve essere chiusa, altrimenti il programma smette di funzionare.</p>
+          </section>
+
+          <section id="interfaccia" class="help-section">
+            <h2>L'interfaccia</h2>
+            <p>L'interfaccia di Coworker e' divisa in tre aree.</p>
+            <h3>Area Modalita (sinistra)</h3>
+            <p>Consente di cambiare modalita, vedere lo storico chat e accedere alla configurazione. Modalita disponibili:</p>
+            <ul>
+              <li><strong>Chat AI (modalita aperta)</strong>: domande libere al modello basate su knowledge base e/o documenti caricati. Supporta:
+                <ul>
+                  <li>modelli con ragionamento (Thinking),</li>
+                  <li>grafica (organigrammi, diagrammi, mappe mentali),</li>
+                  <li>server MCP configurati,</li>
+                  <li>ricerca Wikipedia (unico accesso alla rete),</li>
+                  <li>trascrizioni live dal browser,</li>
+                  <li>mini editor di testo per note o documenti.</li>
+                </ul>
+              </li>
+              <li><strong>Chat Documenti (modalita chiusa)</strong>: il modello risponde solo ai documenti indicizzati in una cartella dedicata. Grafica e mini editor sono disponibili anche qui.</li>
+              <li><strong>Chat Storiche (modalita chiusa)</strong>: il modello risponde basandosi sulle conversazioni salvate e indicizzate.</li>
+            </ul>
+            <p>Nota: all'avvio si parte in Chat AI.</p>
+            <h3>Area Domande al Modello (centrale)</h3>
+            <p>Include il campo di input e le opzioni attivabili in base alla modalita. L'area cambia in modo significativo a seconda della modalita scelta.</p>
+            <h3>Area Risposte del Modello (destra)</h3>
+            <p>Mostra:</p>
+            <ul>
+              <li>il modello coinvolto,</li>
+              <li>la barra di stato/avanzamento,</li>
+              <li>l'area risposta,</li>
+              <li>i pulsanti per stampare, salvare, cancellare chat o pulire l'area risposte.</li>
+            </ul>
+            <p>Nota: il sistema mantiene il contesto finche' non si pulisce l'area, consentendo una conversazione coerente in stile chain of thought.</p>
+          </section>
+
+          <section id="come-funziona" class="help-section">
+            <h2>Come funziona</h2>
+            <p>Coworker offre tre modalita di utilizzo, descritte di seguito.</p>
+            <h3>Modalita: Chat AI</h3>
+            <p>E' la modalita predefinita.</p>
+            <p>Come iniziare:</p>
+            <ul>
+              <li>Inserire una domanda nella casella <strong>Cosa vuoi sapere?</strong>.</li>
+              <li>Per un primo approccio, provare: <strong>"Cosa puoi fare per me?"</strong> e premere <strong>Invia</strong>.</li>
+            </ul>
+            <p>Il modello risponde e mantiene memoria della conversazione, permettendo di fare domande successive.</p>
+            <p>Azioni disponibili:</p>
+            <ul>
+              <li><strong>Salva chat</strong>: salva la conversazione nello storico.</li>
+              <li><strong>Stampa chat</strong>: genera un documento di stampa (con intestazione e pie' di pagina) e consente stampa o PDF.</li>
+              <li><strong>Pulisci chat</strong>: svuota l'area risposte senza salvare.</li>
+              <li><strong>Stop</strong>: interrompe la risposta in corso.</li>
+            </ul>
+            <p>Gestione storico:</p>
+            <ul>
+              <li>le chat salvate compaiono nello storico,</li>
+              <li>e' possibile richiamarle cliccando,</li>
+              <li>e' possibile rinominarle con doppio click,</li>
+              <li>per eliminare: richiamare la chat e cliccare <strong>Cancella chat</strong>.</li>
+            </ul>
+            <h4>Ricerca Wikipedia</h4>
+            <p>In Chat AI e' possibile abilitare <strong>Ricerca Wikipedia</strong> per consultare online solo Wikipedia. Il modello esegue prima la ricerca su Wikipedia e, se non trova risultati, usa la propria knowledge base. Se la risposta proviene da Wikipedia, nelle fonti saranno indicati i link di origine.</p>
+            <h4>MCP (Model Context Protocol)</h4>
+            <p>MCP permette ai modelli AI di accedere a risorse esterne e superare i limiti tipici della chat, collegandosi a sistemi esterni (ERP, posta, calendario, CAD, ecc.).</p>
+            <p>Coworker include un client MCP e comunica con server MCP tramite protocollo HTTP e protocollo STDIO.</p>
+            <p>Quando attivo, l'interfaccia mostra l'elenco dei server MCP connessi. Per interrogarli, digitare <code>@</code> seguito dal nome del server.</p>
+            <p>Attenzione: i server MCP vanno installati dall'utente e configurati con credenziali e permessi appropriati.</p>
+
+            <h3>Modalita: Chat Documenti</h3>
+            <p>In questa modalita il modello risponde <strong>solo</strong> in base ai documenti indicizzati.</p>
+            <p>Passi principali:</p>
+            <ol>
+              <li>Copiare i documenti nella cartella dedicata (configurabile).</li>
+              <li>Avviare l'indicizzazione.</li>
+              <li>Porre domande sui documenti indicizzati.</li>
+            </ol>
+            <p>Caratteristiche:</p>
+            <ul>
+              <li>Modalita chiusa: nessuna risposta fuori dal contenuto indicizzato.</li>
+              <li>Supporta grafica (Graphics) e mini editor.</li>
+              <li>Supporta OCR per immagini (quando il modello multimodale e' disponibile).</li>
+            </ul>
+
+            <h3>Modalita: Chat Storiche</h3>
+            <p>In questa modalita il modello risponde basandosi <strong>solo</strong> sulle conversazioni salvate. Le chat vengono indicizzate automaticamente.</p>
+          </section>
+
+          <section id="configurazione" class="help-section">
+            <h2>Configurazione</h2>
+            <p>La configurazione permette di adattare Coworker alle proprie esigenze. Le sezioni principali sono:</p>
+            <p>Nota: per le funzioni audio serve <code>ffmpeg</code> disponibile nel <code>PATH</code>.</p>
+            <p>Opzioni modificabili dall'utente (principali):</p>
+            <ul>
+              <li>modelli attivi e modelli LLM personalizzati,</li>
+              <li>cartella documenti e cartella modelli,</li>
+              <li>modalita di risposta (streaming) e visibilita del thinking,</li>
+              <li>contesto e max token (fisso/dinamico),</li>
+              <li>limiti di lettura Excel/CSV,</li>
+              <li>formato grafico preferito (SVG/Mermaid/PlantUML),</li>
+              <li>mail per la ricerca Wikipedia,</li>
+              <li>servizi MCP aggiuntivi,</li>
+              <li>API esterne (provider, base URL, modello, chiave API).</li>
+            </ul>
+            <h3>Modelli LLM</h3>
+            <p>Consente di selezionare il modello predefinito, aggiungere o rimuovere modelli e gestire modelli locali disponibili.</p>
+            <h3>Parametri di default</h3>
+            <p>Definisce le impostazioni iniziali del sistema per garantire fluidita e compatibilita con l'hardware.</p>
+            <h3>Parametri LLM</h3>
+            <p>Impostazioni tipiche: finestra di contesto, numero massimo di token e bilanciamento prestazioni/qualita.</p>
+            <p>Nota: token massimi alti migliorano la capacita di risposta ma aumentano l'uso di risorse. Coworker usa valori conservativi, ma e' possibile personalizzarli.</p>
+            <h3>Gestione documenti</h3>
+            <p>Permette di selezionare la cartella documenti, indicizzare o reindicizzare documenti e gestire documenti caricati.</p>
+            <h4>Limiti di lettura Excel/CSV</h4>
+            <p>I file Excel/CSV possono essere molto grandi. Per evitare indicizzazioni errate, sono disponibili limiti configurabili: massimo righe indicizzabili e massimo colonne indicizzabili. Default: 300 righe, 20 colonne.</p>
+            <p>Nota: valori vuoti o 0 ripristinano il default server.</p>
+            <h3>Ricerca Wikipedia</h3>
+            <p>Attiva o disattiva l'accesso a Wikipedia. E' l'unica forma di accesso a internet prevista dal sistema. Per abilitarla e' necessario inserire la propria mail nel campo dedicato, usata come contatto nelle richieste a Wikipedia.</p>
+            <h3>Prompt di sistema</h3>
+            <p>Mostra il prompt interno di sistema (non modificabile dall'utente) che guida il comportamento del modello.</p>
+            <h3>Graphics</h3>
+            <p>Abilita la generazione di grafica da richieste testuali. Formati disponibili:</p>
+            <ul>
+              <li><strong>SVG</strong>: grafica vettoriale statica, adatta a loghi, badge e schemi essenziali. Utile per export immediato.</li>
+              <li><strong>Mermaid</strong>: genera markup testuale per flowchart, organigrammi e mappe mentali. Facile da rendere in anteprima o esportare.</li>
+              <li><strong>PlantUML</strong>: markup UML compatibile con PlantUML. Indicato per diagrammi UML e alternative ai flowchart Mermaid.</li>
+            </ul>
+            <h3>Gestione audio</h3>
+            <p>Controlla trascrizione audio da file, trascrizione live da browser, impostazioni e limiti di registrazione.</p>
+            <p>Nota: le funzioni audio richiedono <code>ffmpeg</code> disponibile nel <code>PATH</code>.</p>
+            <h3>Sintesi vocale</h3>
+            <p>Consente di convertire testi in audio. Disponibile per documenti testuali compatibili.</p>
+            <h3>Servizi MCP</h3>
+            <p>Gestisce la configurazione dei server MCP connessi e le modalita di invocazione. Tramite il tasto <strong>Aggiungi MCP</strong> si incolla uno script JSON di configurazione del servizio.</p>
+            <p>Campi principali del JSON (minimi consigliati):</p>
+            <ul>
+              <li><code>name</code>: identificativo del servizio (usato con <code>@nome</code>).</li>
+              <li><code>label</code>: etichetta descrittiva.</li>
+              <li><code>description</code>: descrizione del servizio.</li>
+              <li><code>type</code>: tipo di servizio (es. <code>mcp_http</code>, <code>mcp_stdio</code>).</li>
+              <li><code>instructions</code>: istruzioni operative mostrate all'utente.</li>
+              <li><code>endpoint</code>/<code>url</code>: endpoint HTTP (per servizi HTTP).</li>
+              <li><code>command</code> e <code>args</code>: comando di avvio (per servizi STDIO).</li>
+              <li>opzionali: <code>headers</code>, <code>payload</code>, <code>env</code>, <code>timeout</code>, <code>prompt_mode</code>, <code>prompt_arg</code>.</li>
+            </ul>
+            <p>Demo MCP in /tools:</p>
+            <ul>
+              <li>Nella cartella <code>lai/tools/micro mcp server/</code> e' presente un micro server MCP di esempio.</li>
+              <li>Avvio STDIO (default): <code>python3 micro_mcp_server.py</code></li>
+              <li>Avvio HTTP: <code>python3 micro_mcp_server.py --transport http --host 127.0.0.1 --port 8000</code></li>
+              <li>Endpoint HTTP: <code>http://127.0.0.1:8000/mcp</code></li>
+            </ul>
+            <p>Nota: se non presente, installare <code>fastmcp</code> con <code>python3 -m pip install fastmcp</code>.</p>
+            <h3>API esterne</h3>
+            <p>Permette la configurazione di servizi esterni compatibili (se abilitati) e relativi parametri. Campi tipici: provider, base URL, nome modello e chiave API.</p>
+            <h3>Percorsi utente</h3>
+            <p>Gestisce percorsi locali per documenti, modelli, cache e dati utente.</p>
+            <h3>Informazioni utente</h3>
+            <p>Sezione con informazioni generali dell'utente e dello stato del sistema.</p>
+            <h3>Preferenze utente</h3>
+            <p>Permette di selezionare opzioni di risposta (streaming o risposta completa), mostrare o nascondere i blocchi di ragionamento (thinking), scegliere contesto fisso o dinamico, scegliere max token fisso o dinamico e definire preferenze grafiche.</p>
+            <p>Dettagli:</p>
+            <ul>
+              <li><strong>Modalita risposta</strong>: in streaming la risposta arriva progressivamente; in modalita completa la risposta viene mostrata solo a fine elaborazione.</li>
+              <li><strong>Contesto fisso/dinamico</strong>: fisso mantiene la finestra predefinita per ridurre memoria e latenza; dinamico estende il contesto quando input o storico sono lunghi.</li>
+              <li><strong>Token fisso/dinamico</strong>: fisso usa il limite di default del server; dinamico adatta il limite tra minimo e massimo in base allo spazio di contesto disponibile.</li>
+            </ul>
+          </section>
+
+          <section id="cambio-lingua" class="help-section">
+            <h2>Cambio di lingua</h2>
+            <p>L'interfaccia e' bilingue. Per passare da Italiano a Inglese (e viceversa), cliccare l'icona lingua in alto a destra.</p>
+          </section>
+
+          <section id="manuale" class="help-section">
+            <h2>Questo manuale</h2>
+            <p>Il manuale e' sempre accessibile dall'applicazione tramite il link <strong>Guida</strong> in basso a destra.</p>
+          </section>
+
+          <section id="appendice" class="help-section">
+            <h2>Appendice</h2>
+            <h3>Descrizione dei modelli LLM utilizzati</h3>
+            <p>Coworker utilizza modelli LLM locali, scelti per offrire un buon compromesso tra prestazioni e affidabilita su portatili da ufficio.</p>
+            <p>Modelli attuali:</p>
+            <ul>
+              <li><strong>Qwen 2.5 3B Instruct (4 bit)</strong>: modello principale per attivita testuali (scrittura, analisi documenti, traduzioni, riassunti). Contesto fino a 32k token.</li>
+              <li><strong>Gemma 3 4B Instruct (4 bit)</strong>: modello multimodale per testo + immagini/OCR. Contesto fino a 128k token.</li>
+              <li><strong>Phi 3.5 4B Instruct (4 bit)</strong>: specializzato in logica, matematica e ragionamento strutturato. Contesto fino a 128k token.</li>
+              <li><strong>Qwen 3 4B Instruct (4 bit)</strong>: dedicato al thinking (ragionamento profondo). Contesto fino a 32k token, richiede piu risorse.</li>
+            </ul>
+            <p>Tutti i modelli sono Open Weight e operano localmente. Le dimensioni (3-4B parametri) sono ottimizzate per hardware da ufficio.</p>
+            <p>Concetti base:</p>
+            <ul>
+              <li><strong>Prompt</strong>: richiesta dell'utente.</li>
+              <li><strong>Context window</strong>: quantita di informazioni mantenute in memoria (domanda, risposte, documenti).</li>
+              <li><strong>Token</strong>: unita minime di elaborazione (non equivalgono sempre a parole).</li>
+            </ul>
+            <p>Un corretto bilanciamento tra prompt, token e contesto migliora le risposte e l'efficienza. Coworker gestisce automaticamente questi parametri in base all'hardware.</p>
+
+            <h3>Come scrivere un prompt efficace</h3>
+            <ul>
+              <li><strong>Chiarezza dell'obiettivo</strong>: evitare richieste generiche. Preferire richieste mirate (riassunto, estrazione dati, confronto).</li>
+              <li><strong>Contesto</strong>: specificare ruolo, scopo e contesto (presentazione, procedura interna, documento tecnico).</li>
+              <li><strong>Documenti e immagini</strong>: indicare se la risposta deve basarsi solo sui documenti caricati o se sono accettate considerazioni generali.</li>
+              <li><strong>Thinking</strong>: con ragionamento attivo, domande precise e focalizzate. Suddividere problemi complessi in passi.</li>
+              <li><strong>Formato della risposta</strong>: indicare se si desidera elenco, tabella, schema o testo discorsivo.</li>
+              <li><strong>Iterazione</strong>: la prima risposta puo' essere affinata con domande successive.</li>
+              <li><strong>Spirito critico</strong>: Coworker e' uno strumento di supporto, non sostituisce la responsabilita decisionale dell'utente.</li>
+            </ul>
+
+            <h3>Installazione</h3>
+            <p>Prima di avviare il programma e' necessario eseguire gli script di setup.</p>
+            <p><strong>Windows</strong>:</p>
+            <ol>
+              <li>Fare doppio click su <code>setup_windows.bat</code>.</li>
+              <li>Attendere il completamento dell'installazione delle dipendenze.</li>
+            </ol>
+            <p><strong>macOS</strong> (ordine consigliato):</p>
+            <ol>
+              <li>Fare doppio click su <code>setup_mac.command</code>.</li>
+              <li>Al termine, fare doppio click su <code>install_llama_mac.command</code>.</li>
+              <li>Attendere il completamento di entrambi gli script.</li>
+            </ol>
+            <p>Cosa fanno gli script di setup (in breve):</p>
+            <ul>
+              <li>Preparano l'ambiente Python (virtualenv) e installano le dipendenze richieste.</li>
+              <li>Scaricano e configurano i componenti locali necessari all'esecuzione dei modelli.</li>
+            </ul>
+            <p>Nota: <code>ffmpeg</code> non e' incluso nel repository. Va installato separatamente e deve essere disponibile nel <code>PATH</code> per le funzioni audio.</p>
+            <p>Installazione consigliata:</p>
+            <ul>
+              <li>macOS (Homebrew): <code>brew install ffmpeg</code></li>
+              <li>Windows (winget): <code>winget install Gyan.FFmpeg</code></li>
+              <li>Windows (Chocolatey): <code>choco install ffmpeg</code></li>
+            </ul>
+            <p>Se su macOS i file <code>.command</code> non partono, eseguire da terminale:</p>
+            <ol>
+              <li>Aprire Terminale nella cartella del progetto.</li>
+              <li>Rendere eseguibili gli script:</li>
+            </ol>
+            <pre><code>chmod +x setup_mac.command
+chmod +x install_llama_mac.command
+chmod +x coworker.command</code></pre>
+            <ol start="3">
+              <li>Avviare gli script:</li>
+            </ol>
+            <pre><code>./setup_mac.command
+./install_llama_mac.command</code></pre>
+            <ol start="4">
+              <li>Avviare l'app:</li>
+            </ol>
+            <pre><code>./coworker.command</code></pre>
+
+            <h3>Glossario dei termini tecnici</h3>
+            <ul>
+              <li><strong>AI (Intelligenza Artificiale)</strong>: sistema informatico per comprendere testi, analizzare informazioni e formulare risposte.</li>
+              <li><strong>Chain of Thought</strong>: ragionamento interno che produce risposte piu approfondite, ma richiede piu risorse.</li>
+              <li><strong>Chat AI</strong>: modalita aperta basata su conoscenze generali e contenuti caricati.</li>
+              <li><strong>Chat Documenti</strong>: modalita chiusa basata esclusivamente sui documenti indicizzati.</li>
+              <li><strong>Chat Storiche</strong>: modalita chiusa basata su conversazioni salvate.</li>
+              <li><strong>Context Window (finestra di contesto)</strong>: memoria temporanea del modello (domanda, risposte, contenuti recenti).</li>
+              <li><strong>GPU / CPU</strong>: componenti hardware che eseguono i calcoli.</li>
+              <li><strong>Hardware</strong>: componenti fisiche (CPU, RAM, disco) che influenzano prestazioni.</li>
+              <li><strong>Indicizzazione</strong>: processo di preparazione di documenti/immagini/audio per l'interrogazione.</li>
+              <li><strong>Knowledge Base</strong>: insieme delle informazioni a disposizione del modello in quel momento.</li>
+              <li><strong>LLM (Large Language Model)</strong>: modello di linguaggio di grandi dimensioni.</li>
+              <li><strong>Locale (sistema locale)</strong>: funzionamento interamente sul computer dell'utente.</li>
+              <li><strong>Man in the Middle (supervisione umana)</strong>: l'AI supporta, ma la decisione resta all'utente.</li>
+              <li><strong>MCP (Model Context Protocol)</strong>: protocollo per collegare l'AI a strumenti esterni.</li>
+              <li><strong>Modello specializzato</strong>: modello ottimizzato per compiti specifici (testo, immagini, logica).</li>
+              <li><strong>Multimodale</strong>: modello che gestisce piu tipi di dati (testo, immagini, audio).</li>
+              <li><strong>OCR (Optical Character Recognition)</strong>: riconoscimento testo da immagini/documenti scansionati.</li>
+              <li><strong>Open Weight</strong>: modello con parametri disponibili per uso locale.</li>
+              <li><strong>Prestazioni</strong>: rapidita/efficienza delle risposte in base a modello e hardware.</li>
+              <li><strong>Prompt</strong>: testo scritto dall'utente per porre una richiesta.</li>
+              <li><strong>Prompt di sistema</strong>: istruzioni interne che guidano il comportamento del modello.</li>
+              <li><strong>Quantizzazione</strong>: tecnica per ridurre l'uso di memoria dei modelli.</li>
+              <li><strong>RAG (Retrieval Augmented Generation)</strong>: combinazione di ricerca su documenti locali e generazione di risposte.</li>
+              <li><strong>SVG</strong>: formato vettoriale per grafica semplice.</li>
+              <li><strong>Thinking</strong>: modalita di ragionamento profondo.</li>
+              <li><strong>Token</strong>: unita minima di elaborazione.</li>
+              <li><strong>Token Max</strong>: limite massimo di token in uscita.</li>
+              <li><strong>Trascrizione Live</strong>: registrazione audio con conversione in testo.</li>
+              <li><strong>Wikipedia API</strong>: accesso controllato a Wikipedia per informazioni verificabili.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <div class="help-footer">Coworker - Manuale Utente</div>
+    </main>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('help-search');
+    const searchClear = document.getElementById('help-search-clear');
+    const searchCount = document.getElementById('help-search-count');
+    const sections = Array.from(document.querySelectorAll('.help-section'));
+
+    function updateSearch() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      sections.forEach((section) => {
+        const match = !query || section.textContent.toLowerCase().includes(query);
+        section.classList.toggle('hidden', !match);
+        if (match) visibleCount += 1;
+      });
+
+      if (!query) {
+        searchCount.textContent = '';
+      } else {
+        searchCount.textContent = `Sezioni trovate: ${visibleCount}`;
+      }
+    }
+
+    searchInput.addEventListener('input', updateSearch);
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      updateSearch();
+      searchInput.focus();
+    });
+  </script>
+</body>
+</html>

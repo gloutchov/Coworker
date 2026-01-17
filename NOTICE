@@ -1,0 +1,13 @@
+Coworker
+Copyright 2026 Gloutchov
+
+Dependencies and requirements (summary):
+- Python 3.11 environment (see requirements_mac_311.txt / requirements_windows_311.txt)
+- FastAPI application stack (installed via requirements files)
+- ffmpeg installed separately and available on PATH for audio features (not bundled)
+- Local LLM model files in GGUF format (downloaded from official model repositories; not included)
+- Optional: fastmcp (only required to run the MCP demo server in lai/tools/micro mcp server/)
+
+Notes:
+- Model files are not shipped with this repository; place them under models/.
+- Some features rely on external binaries or local system capabilities (e.g., ffmpeg).

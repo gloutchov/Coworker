@@ -1,0 +1,58 @@
+annotated-doc==0.0.4
+annotated-types==0.7.0
+anyio==4.6.2.post1      
+beautifulsoup4==4.12.3  
+certifi==2024.8.30      
+charset-normalizer==3.3.2
+click==8.1.7
+colorama==0.4.6         # Non usato su Mac, ma innocuo
+CairoSVG==2.7.1
+diskcache==5.6.3
+et_xmlfile==2.0.0
+fastapi>=0.115.0        
+faster-whisper>=0.10
+filelock==3.16.1
+fsspec==2024.6.1        
+h11==0.14.0
+hf-xet==1.2.0
+httpcore==1.0.5
+httptools==0.6.1        
+httpx>=0.26.0           
+huggingface_hub==0.24.0 
+idna==3.7
+Jinja2==3.1.4
+# llama_cpp_python escluso: installazione separata con Metal
+lxml==5.3.0             
+MarkupSafe==2.1.3
+numpy==1.26.4           
+openpyxl==3.1.2
+packaging==24.1
+psutil>=5.9.0
+TTS==0.22.0
+langdetect==1.0.9
+pydantic==2.8.2
+pydantic_core==2.20.1
+python-multipart==0.0.9
+PyPDF2==3.0.1
+python-docx==1.1.2
+python-dotenv==1.0.1
+PyYAML==6.0.1
+requests==2.32.3
+shellingham==1.5.4
+sniffio==1.3.1
+soupsieve==2.5
+starlette>=0.38.6       # Pin for compatibility with fastapi 0.115.0
+transformers==4.41.2    # richiesto da Coqui XTTS
+tqdm==4.66.4
+torch==2.5.1
+torchaudio==2.5.1
+torchcodec==0.2.0
+typer-slim==0.20.0      # Allinea a Windows, ok con click 8.1.x
+typing-inspection==0.3.0
+typing_extensions==4.12.2
+urllib3==2.2.2
+uvicorn==0.30.5
+watchfiles==0.21.0      
+websockets==12.0
+fastmcp
+mcp

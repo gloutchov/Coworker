@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coworker - User Guide (EN)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .help-shell {
+      min-height: 100vh;
+    }
+
+    .help-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 1.5rem 2rem;
+      overflow: auto;
+    }
+
+    .help-hero {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-hero h1 {
+      margin: 0 0 0.35rem 0;
+      font-size: 1.6rem;
+    }
+
+    .help-hero p {
+      margin: 0.25rem 0 0;
+      color: var(--text-muted);
+    }
+
+    .help-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-search {
+      flex: 1 1 260px;
+      min-width: 220px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.6rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .help-search:focus {
+      outline: none;
+      border-color: var(--cowork-blue);
+      box-shadow: 0 0 0 1px rgba(31, 79, 209, 0.15);
+    }
+
+    .help-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 260px) 1fr;
+      gap: 1rem;
+    }
+
+    .help-toc {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.9rem;
+      height: fit-content;
+      position: sticky;
+      top: 0.75rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-toc h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .help-toc a {
+      display: block;
+      color: var(--cowork-blue-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.2rem 0;
+    }
+
+    .help-toc a:hover {
+      text-decoration: underline;
+    }
+
+    .help-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .help-section {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-section h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .help-section h3 {
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .help-section ul,
+    .help-section ol {
+      padding-left: 1.1rem;
+    }
+
+    .help-section li {
+      margin: 0.25rem 0;
+    }
+
+    .help-section.hidden {
+      display: none;
+    }
+
+    .help-footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 1rem 0 0.5rem;
+    }
+
+    @media (max-width: 980px) {
+      .help-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .help-toc {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell help-shell">
+    <header class="app-header">
+      <div class="header-left">
+        <img src="../logo.jpg" alt="Coworker Logo" class="app-logo" />
+        <span class="app-title">Coworker</span>
+      </div>
+      <div class="header-right">
+        <span class="app-version">User Guide</span>
+      </div>
+    </header>
+
+    <main class="help-main">
+      <section class="help-hero">
+        <h1>User Manual (EN)</h1>
+        <p>Content derived from README.md. Images removed for branding reasons.</p>
+      </section>
+
+      <section class="help-toolbar">
+        <input id="help-search" class="help-search" type="search" placeholder="Search the manual..." aria-label="Search the manual" />
+        <button id="help-search-clear" class="secondary-btn" type="button">Clear</button>
+        <span id="help-search-count" class="status-text"></span>
+      </section>
+
+      <div class="help-layout">
+        <nav class="help-toc">
+          <h3>Contents</h3>
+          <a href="#introduction">Introduction</a>
+          <a href="#getting-started">Getting started</a>
+          <a href="#interface">Interface</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#configuration">Configuration</a>
+          <a href="#language">Language switch</a>
+          <a href="#manual">This manual</a>
+          <a href="#appendix">Appendix</a>
+        </nav>
+
+        <div class="help-content" id="help-content">
+          <section id="introduction" class="help-section">
+            <h2>Introduction</h2>
+            <p>Coworker is an experimental project designed to provide a local AI companion for people working on a computer. It uses local Open Weight LLMs tuned for standard office laptops and supports daily tasks.</p>
+            <p>Main features:</p>
+            <ul>
+              <li>Brainstorming (with or without reasoning).</li>
+              <li>Information retrieval based on:
+                <ul>
+                  <li>the model knowledge base,</li>
+                  <li>local document archives,</li>
+                  <li>previous conversations.</li>
+                </ul>
+              </li>
+              <li>Transcription of audio files or live conversations.</li>
+              <li>Creation of org charts, flowcharts, and mind maps from chats or local documents.</li>
+              <li>Use of MCP tools (user managed).</li>
+            </ul>
+            <p>The system is built to protect privacy by keeping data local and avoiding third party servers.</p>
+          </section>
+
+          <section id="getting-started" class="help-section">
+            <h2>Getting started</h2>
+            <h3>Starting Coworker</h3>
+            <p>To start the program:</p>
+            <ol>
+              <li>Double click <code>coworker.bat</code>.</li>
+              <li>A terminal window opens to load the local server.</li>
+              <li>The interface opens in your browser (initially standby).</li>
+            </ol>
+            <p>On macOS you can start the app by double clicking <code>coworker.command</code>.</p>
+            <p>At startup the server detects hardware and sets performance parameters (context window and max tokens). It also initializes the database for RAG and local preferences.</p>
+            <p>Note: on slower systems you may need to reload the page to see saved chats.</p>
+            <p>Warning: you can minimize the terminal window but do not close it.</p>
+          </section>
+
+          <section id="interface" class="help-section">
+            <h2>Interface</h2>
+            <p>The Coworker interface is divided into three areas.</p>
+            <h3>Mode area (left)</h3>
+            <p>Lets you switch modes, view chat history, and open configuration. Available modes:</p>
+            <ul>
+              <li><strong>Chat AI (open mode)</strong>: free questions based on model knowledge and loaded documents. Supports:
+                <ul>
+                  <li>reasoning models (Thinking),</li>
+                  <li>graphics (org charts, flowcharts, mind maps),</li>
+                  <li>configured MCP servers,</li>
+                  <li>Wikipedia search (only network access),</li>
+                  <li>live transcription from the browser,</li>
+                  <li>a mini editor for notes or short documents.</li>
+                </ul>
+              </li>
+              <li><strong>Chat Documents (closed mode)</strong>: answers only from indexed documents in a dedicated folder. Graphics and mini editor are available here too.</li>
+              <li><strong>Chat History (closed mode)</strong>: answers based on saved and indexed conversations.</li>
+            </ul>
+            <p>Note: the app starts in Chat AI mode.</p>
+            <h3>Question area (center)</h3>
+            <p>Includes the input field and options that change by mode.</p>
+            <h3>Answer area (right)</h3>
+            <p>Shows:</p>
+            <ul>
+              <li>the active model,</li>
+              <li>status/progress bar,</li>
+              <li>response area,</li>
+              <li>buttons to print, save, delete, or clear the chat.</li>
+            </ul>
+            <p>Note: the system keeps context until you clear the area, enabling a chain of thought conversation.</p>
+          </section>
+
+          <section id="how-it-works" class="help-section">
+            <h2>How it works</h2>
+            <p>Coworker offers three usage modes, described below.</p>
+            <h3>Mode: Chat AI</h3>
+            <p>This is the default mode.</p>
+            <p>Getting started:</p>
+            <ul>
+              <li>Enter a question in <strong>Cosa vuoi sapere?</strong>.</li>
+              <li>For a first run, try: <strong>"Cosa puoi fare per me?"</strong> and press <strong>Send</strong>.</li>
+            </ul>
+            <p>The model responds and remembers the conversation so you can ask follow up questions.</p>
+            <p>Available actions:</p>
+            <ul>
+              <li><strong>Save chat</strong>: saves the conversation to history.</li>
+              <li><strong>Print chat</strong>: generates a print document (header and footer) and allows print or PDF.</li>
+              <li><strong>Clear chat</strong>: clears the response area without saving.</li>
+              <li><strong>Stop</strong>: interrupts the current response.</li>
+            </ul>
+            <p>History management:</p>
+            <ul>
+              <li>saved chats appear in history,</li>
+              <li>you can reopen them by clicking,</li>
+              <li>you can rename them with double click,</li>
+              <li>to delete: open the chat and click <strong>Delete chat</strong>.</li>
+            </ul>
+            <h4>Wikipedia search</h4>
+            <p>In Chat AI you can enable <strong>Wikipedia search</strong> to query only Wikipedia. The model searches Wikipedia first and, if nothing is found, uses its own knowledge base. Source links are listed when Wikipedia is used.</p>
+            <h4>MCP (Model Context Protocol)</h4>
+            <p>MCP lets AI models access external resources and go beyond basic chat limits, connecting to external systems (ERP, email, calendar, CAD, etc.).</p>
+            <p>Coworker includes an MCP client and communicates with MCP servers via HTTP and STDIO protocols.</p>
+            <p>When enabled, the interface shows connected MCP servers. To query them, type <code>@</code> followed by the server name.</p>
+            <p>Warning: MCP servers must be installed and configured by the user with proper credentials and permissions.</p>
+
+            <h3>Mode: Chat Documents</h3>
+            <p>In this mode the model answers <strong>only</strong> based on indexed documents.</p>
+            <p>Main steps:</p>
+            <ol>
+              <li>Copy documents into the dedicated folder (configurable).</li>
+              <li>Run indexing.</li>
+              <li>Ask questions about the indexed documents.</li>
+            </ol>
+            <p>Characteristics:</p>
+            <ul>
+              <li>Closed mode: no answers outside indexed content.</li>
+              <li>Supports Graphics and the mini editor.</li>
+              <li>Supports OCR for images (when a multimodal model is available).</li>
+            </ul>
+
+            <h3>Mode: Chat History</h3>
+            <p>In this mode the model answers based <strong>only</strong> on saved conversations. Chats are indexed automatically.</p>
+          </section>
+
+          <section id="configuration" class="help-section">
+            <h2>Configuration</h2>
+            <p>Configuration lets you adapt Coworker to your needs. Main sections:</p>
+            <p>Note: audio features require <code>ffmpeg</code> available on <code>PATH</code>.</p>
+            <p>User editable options (main):</p>
+            <ul>
+              <li>active models and custom LLM models,</li>
+              <li>documents folder and models folder,</li>
+              <li>response delivery (streaming) and thinking visibility,</li>
+              <li>context and max tokens (fixed/dynamic),</li>
+              <li>Excel/CSV read limits,</li>
+              <li>preferred graphics format (SVG/Mermaid/PlantUML),</li>
+              <li>email for Wikipedia search,</li>
+              <li>additional MCP services,</li>
+              <li>external APIs (provider, base URL, model, API key).</li>
+            </ul>
+            <h3>LLM models</h3>
+            <p>Select the default model, add or remove models, and manage available local models.</p>
+            <h3>Default parameters</h3>
+            <p>Initial settings to ensure smooth performance and hardware compatibility.</p>
+            <h3>LLM parameters</h3>
+            <p>Typical settings: context window, max tokens, and performance/quality balance.</p>
+            <p>Note: higher max tokens improve response capacity but use more resources. Coworker uses conservative values, but they can be customized.</p>
+            <h3>Document management</h3>
+            <p>Select the document folder, index or reindex content, and manage uploaded documents.</p>
+            <h4>Excel/CSV limits</h4>
+            <p>Excel/CSV files can be large. To avoid incorrect indexing, configurable limits are available for max rows and max columns. Default: 300 rows, 20 columns.</p>
+            <p>Note: empty values or 0 reset to server defaults.</p>
+            <h3>Wikipedia search</h3>
+            <p>Enable or disable Wikipedia access. This is the only network access allowed by the system. To enable it you must add your email in the dedicated field, used as contact for Wikipedia requests.</p>
+            <h3>System prompt</h3>
+            <p>Displays the internal system prompt (not user editable) that guides model behavior.</p>
+            <h3>Graphics</h3>
+            <p>Enable graphic generation from text prompts. Available formats:</p>
+            <ul>
+              <li><strong>SVG</strong>: static vector output for logos, badges, and simple schemes. Good for immediate export.</li>
+              <li><strong>Mermaid</strong>: text markup for flowcharts, org charts, and mind maps, easy to render.</li>
+              <li><strong>PlantUML</strong>: UML oriented markup, useful for UML diagrams and alternatives to Mermaid flowcharts.</li>
+            </ul>
+            <h3>Audio management</h3>
+            <p>Controls file transcription, live transcription from the browser, and recording settings and limits.</p>
+            <p>Note: audio features require <code>ffmpeg</code> available on <code>PATH</code>.</p>
+            <h3>Text to speech</h3>
+            <p>Converts text documents to audio.</p>
+            <h3>MCP services</h3>
+            <p>Configure connected MCP servers and invocation modes. Use the <strong>Add MCP</strong> button to paste a JSON service configuration.</p>
+            <p>Main JSON fields (recommended minimum):</p>
+            <ul>
+              <li><code>name</code>: service identifier (used with <code>@name</code>).</li>
+              <li><code>label</code>: display label.</li>
+              <li><code>description</code>: service description.</li>
+              <li><code>type</code>: service type (e.g. <code>mcp_http</code>, <code>mcp_stdio</code>).</li>
+              <li><code>instructions</code>: usage instructions.</li>
+              <li><code>endpoint</code>/<code>url</code>: HTTP endpoint (for HTTP services).</li>
+              <li><code>command</code> and <code>args</code>: startup command (for STDIO services).</li>
+              <li>optional: <code>headers</code>, <code>payload</code>, <code>env</code>, <code>timeout</code>, <code>prompt_mode</code>, <code>prompt_arg</code>.</li>
+            </ul>
+            <p>MCP demo in /tools:</p>
+            <ul>
+              <li>A demo MCP server is available in <code>lai/tools/micro mcp server/</code>.</li>
+              <li>STDIO start (default): <code>python3 micro_mcp_server.py</code></li>
+              <li>HTTP start: <code>python3 micro_mcp_server.py --transport http --host 127.0.0.1 --port 8000</code></li>
+              <li>HTTP endpoint: <code>http://127.0.0.1:8000/mcp</code></li>
+            </ul>
+            <p>Note: install <code>fastmcp</code> if missing with <code>python3 -m pip install fastmcp</code>.</p>
+            <h3>External APIs</h3>
+            <p>Configure compatible external services when enabled. Typical fields: provider, base URL, model name, API key.</p>
+            <h3>User paths</h3>
+            <p>Manage local paths for documents, models, cache, and user data.</p>
+            <h3>User information</h3>
+            <p>General user information and system status.</p>
+            <h3>User preferences</h3>
+            <p>Set response options (streaming or full response), show or hide thinking blocks, choose fixed or dynamic context, choose fixed or dynamic max tokens, and set display preferences.</p>
+            <p>Details:</p>
+            <ul>
+              <li><strong>Response delivery</strong>: streaming shows tokens progressively; full response appears only when complete.</li>
+              <li><strong>Fixed/dynamic context</strong>: fixed keeps the default window to reduce memory/latency; dynamic expands context for long inputs or histories.</li>
+              <li><strong>Fixed/dynamic tokens</strong>: fixed uses the server default; dynamic adjusts the limit between min and max based on available context.</li>
+            </ul>
+          </section>
+
+          <section id="language" class="help-section">
+            <h2>Language switch</h2>
+            <p>The interface is bilingual. Click the language icon in the top right to switch Italian/English.</p>
+          </section>
+
+          <section id="manual" class="help-section">
+            <h2>This manual</h2>
+            <p>The manual is always available from the app via the <strong>Help</strong> link in the bottom right.</p>
+          </section>
+
+          <section id="appendix" class="help-section">
+            <h2>Appendix</h2>
+            <h3>LLM models used</h3>
+            <p>Coworker uses local LLMs chosen for a balance of performance and reliability on office hardware.</p>
+            <p>Current models:</p>
+            <ul>
+              <li><strong>Qwen 2.5 3B Instruct (4 bit)</strong>: main text model (writing, document analysis, translations, summaries). Context up to 32k tokens.</li>
+              <li><strong>Gemma 3 4B Instruct (4 bit)</strong>: multimodal model for text + images/OCR. Context up to 128k tokens.</li>
+              <li><strong>Phi 3.5 4B Instruct (4 bit)</strong>: specialized in logic, math, and structured reasoning. Context up to 128k tokens.</li>
+              <li><strong>Qwen 3 4B Instruct (4 bit)</strong>: dedicated to deep thinking. Context up to 32k tokens, higher resource usage.</li>
+            </ul>
+            <p>All models are Open Weight and run locally. Sizes (3-4B parameters) are tuned for office hardware.</p>
+            <p>Core concepts:</p>
+            <ul>
+              <li><strong>Prompt</strong>: user request.</li>
+              <li><strong>Context window</strong>: how much information the model keeps in memory (question, answers, documents).</li>
+              <li><strong>Token</strong>: minimal processing unit (not always a full word).</li>
+            </ul>
+            <p>Balancing prompt, tokens, and context improves responses and efficiency. Coworker manages these parameters automatically based on hardware.</p>
+
+            <h3>How to write effective prompts</h3>
+            <ul>
+              <li><strong>Clear goal</strong>: avoid generic requests. Prefer targeted tasks (summary, data extraction, comparison).</li>
+              <li><strong>Context</strong>: specify role, goal, and scenario (presentation, internal procedure, technical document).</li>
+              <li><strong>Documents and images</strong>: state whether answers must rely only on uploaded documents or can include general considerations.</li>
+              <li><strong>Thinking</strong>: with reasoning enabled, ask precise and focused questions. Break complex problems into steps.</li>
+              <li><strong>Output format</strong>: specify lists, tables, structured output, or narrative text.</li>
+              <li><strong>Iteration</strong>: refine the first response with follow up questions.</li>
+              <li><strong>Critical review</strong>: Coworker is a support tool and does not replace user responsibility.</li>
+            </ul>
+
+            <h3>Installation</h3>
+            <p>Before starting the program, run the setup scripts.</p>
+            <p><strong>Windows</strong>:</p>
+            <ol>
+              <li>Double click <code>setup_windows.bat</code>.</li>
+              <li>Wait for dependency installation to finish.</li>
+            </ol>
+            <p><strong>macOS</strong> (recommended order):</p>
+            <ol>
+              <li>Double click <code>setup_mac.command</code>.</li>
+              <li>Then double click <code>install_llama_mac.command</code>.</li>
+              <li>Wait for both scripts to complete.</li>
+            </ol>
+            <p>What the setup scripts do (summary):</p>
+            <ul>
+              <li>Prepare the Python environment (virtualenv) and install required dependencies.</li>
+              <li>Download and configure local components needed to run the models.</li>
+            </ul>
+            <p>Note: <code>ffmpeg</code> is not included in this repository. Install it separately and make sure it is available on <code>PATH</code> for audio features.</p>
+            <p>Recommended installation:</p>
+            <ul>
+              <li>macOS (Homebrew): <code>brew install ffmpeg</code></li>
+              <li>Windows (winget): <code>winget install Gyan.FFmpeg</code></li>
+              <li>Windows (Chocolatey): <code>choco install ffmpeg</code></li>
+            </ul>
+            <p>If macOS does not open <code>.command</code> files, run from Terminal:</p>
+            <ol>
+              <li>Open Terminal in the project folder.</li>
+              <li>Make the scripts executable:</li>
+            </ol>
+            <pre><code>chmod +x setup_mac.command
+chmod +x install_llama_mac.command
+chmod +x coworker.command</code></pre>
+            <ol start="3">
+              <li>Run the setup scripts:</li>
+            </ol>
+            <pre><code>./setup_mac.command
+./install_llama_mac.command</code></pre>
+            <ol start="4">
+              <li>Start the app:</li>
+            </ol>
+            <pre><code>./coworker.command</code></pre>
+
+            <h3>Glossary of technical terms</h3>
+            <ul>
+              <li><strong>AI</strong>: system that understands text, analyzes information, and produces responses.</li>
+              <li><strong>Chain of Thought</strong>: internal reasoning producing deeper answers, but uses more resources.</li>
+              <li><strong>Chat AI</strong>: open mode based on general knowledge and loaded content.</li>
+              <li><strong>Chat Documents</strong>: closed mode based only on indexed documents.</li>
+              <li><strong>Chat History</strong>: closed mode based on saved conversations.</li>
+              <li><strong>Context Window</strong>: temporary model memory (question, answers, recent content).</li>
+              <li><strong>GPU / CPU</strong>: hardware components that perform the computations.</li>
+              <li><strong>Hardware</strong>: physical components affecting performance.</li>
+              <li><strong>Indexing</strong>: process to prepare documents, images, or audio for querying.</li>
+              <li><strong>Knowledge Base</strong>: information available to the model at a given time.</li>
+              <li><strong>LLM</strong>: large language model.</li>
+              <li><strong>Local</strong>: runs entirely on the user's computer.</li>
+              <li><strong>Man in the Middle</strong>: the AI supports, but the user decides.</li>
+              <li><strong>MCP</strong>: protocol to connect AI to external tools.</li>
+              <li><strong>Specialized model</strong>: optimized for specific tasks.</li>
+              <li><strong>Multimodal</strong>: works with text, images, and audio.</li>
+              <li><strong>OCR</strong>: text recognition from images or scanned documents.</li>
+              <li><strong>Open Weight</strong>: model parameters are available for local use.</li>
+              <li><strong>Performance</strong>: speed and efficiency based on model and hardware.</li>
+              <li><strong>Prompt</strong>: user input request to the model.</li>
+              <li><strong>System prompt</strong>: internal instructions guiding the model.</li>
+              <li><strong>Quantization</strong>: technique to reduce model memory usage.</li>
+              <li><strong>RAG</strong>: retrieval from local documents plus generation.</li>
+              <li><strong>SVG</strong>: vector format for simple graphics.</li>
+              <li><strong>Thinking</strong>: deep reasoning mode.</li>
+              <li><strong>Token</strong>: minimal unit of processing.</li>
+              <li><strong>Token Max</strong>: maximum number of tokens in output.</li>
+              <li><strong>Live transcription</strong>: audio recording converted to text.</li>
+              <li><strong>Wikipedia API</strong>: controlled access to Wikipedia.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <div class="help-footer">Coworker - User Manual</div>
+    </main>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('help-search');
+    const searchClear = document.getElementById('help-search-clear');
+    const searchCount = document.getElementById('help-search-count');
+    const sections = Array.from(document.querySelectorAll('.help-section'));
+
+    function updateSearch() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      sections.forEach((section) => {
+        const match = !query || section.textContent.toLowerCase().includes(query);
+        section.classList.toggle('hidden', !match);
+        if (match) visibleCount += 1;
+      });
+
+      if (!query) {
+        searchCount.textContent = '';
+      } else {
+        searchCount.textContent = `Sections found: ${visibleCount}`;
+      }
+    }
+
+    searchInput.addEventListener('input', updateSearch);
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      updateSearch();
+      searchInput.focus();
+    });
+  </script>
+</body>
+</html>

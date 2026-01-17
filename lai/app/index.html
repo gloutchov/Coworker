@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coworker</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="header-left">
+        <img src="logo.jpg" alt="Logo Coworker" class="app-logo">
+        <span class="app-title">Coworker</span>
+      </div>
+      <div class="header-right">
+        <button id="lang-toggle" class="lang-toggle-btn" type="button" data-translate-key="languageToggleLabel" data-translate-attr="aria-label" aria-label="Cambia lingua">
+          <img id="lang-icon" src="gb.ico" alt="Switch language" />
+        </button>
+        <span class="app-version" data-translate-key="appVersion">Ver 0.96 MultiModel</span>
+      </div>
+    </header>
+
+    <!-- CONTENUTO PRINCIPALE -->
+    <main class="app-main">
+      <!-- COLONNA SINISTRA: MODALITÀ + STORICO + CONFIG -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-label" data-translate-key="modeLabel">Modalità</div>
+          <button id="btn-mode-chat" class="sidebar-btn sidebar-btn-active" data-translate-key="chatMode">
+            Chat AI
+          </button>
+          <button id="btn-mode-rag" class="sidebar-btn" data-translate-key="ragMode">
+            Chat Documenti
+          </button>
+          <button id="btn-mode-history" class="sidebar-btn" data-translate-key="historyMode">
+            Chat Storiche
+          </button>
+        </div>
+
+        <div class="sidebar-section sidebar-history">
+          <div class="sidebar-label" data-translate-key="historyLabel">Storico chat</div>
+          <input
+            id="chat-history-search"
+            class="history-search-input"
+            type="text"
+            placeholder="Cerca nello storico..."
+            data-translate-key="historySearchPlaceholder"
+            data-translate-attr="placeholder"
+          />
+          <div id="chat-history" class="history-list">
+            <!-- Per ora vuoto: lo implementiamo dopo -->
+            <div class="history-empty" data-translate-key="historyEmpty">
+              Nessuna chat salvata.
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-bottom">
+          <button id="btn-config" class="sidebar-btn sidebar-btn-config" data-translate-key="configButton">
+            Configurazione
+          </button>
+        </div>
+      </aside>
+
+      <!-- COLONNA CENTRALE: INPUT CHAT / RAG -->
+      <section class="chat-input">
+        <div class="input-section">
+          <div class="input-title" id="input-title" data-translate-key="inputTitle">
+            Cosa vuoi sapere?
+          </div>
+          <textarea
+            id="user-input"
+            class="input-textarea"
+            placeholder="Scrivi qui la tua domanda..."
+            data-translate-key="inputPlaceholder"
+            data-translate-attr="placeholder"
+          ></textarea>
+          <div class="input-actions">
+            <button id="btn-send" class="primary-btn" data-translate-key="sendButton">
+              Invia
+            </button>
+            <button id="btn-note-mode" class="secondary-btn" data-translate-key="noteModeButton">Note</button>
+            <button id="btn-live-transcribe" class="secondary-btn live-toggle-btn" data-translate-key="liveTranscribeButton">
+              Trascrizione Live
+            </button>
+          </div>
+          <div class="input-toggles">
+            <label class="status-text web-search-label">
+              <input type="checkbox" id="chk-web-search" />
+              <span data-translate-key="webSearchLabel">Ricerca Wikipedia</span>
+            </label>
+            <label class="status-text web-search-label mcp-toggle">
+              <input type="checkbox" id="chk-mcp" />
+              <span data-translate-key="mcpLabel">MCP</span>
+            </label>
+            <label class="status-text web-search-label thinking-toggle">
+              <input type="checkbox" id="chk-thinking" />
+              <span data-translate-key="thinkingLabel">Thinking</span>
+            </label>
+            <label class="status-text web-search-label graphics-toggle" id="graphics-toggle-label">
+              <input type="checkbox" id="chk-graphics-mode" />
+              <span data-translate-key="graphicsLabel">Graphics</span>
+            </label>
+          </div>
+
+          <!-- Nuova sezione: caricamento file locale (audio o documenti) -->
+          <div id="audio-panel" class="rag-audio-panel">
+            <div class="rag-audio-title" data-translate-key="fileUploadTitle">Carica file locale</div>
+            <div class="rag-audio-controls">
+        <label class="secondary-btn">
+          <span data-translate-key="chooseFileButton">Scegli file</span>
+          <input type="file" id="audio-file" class="hidden" />
+        </label>
+        <button id="btn-transcribe" class="secondary-btn hidden" type="button" data-translate-key="transcribeFileButton">
+                Trascrizione File Audio
+              </button>
+              <label id="image-ocr-label" class="status-text hidden">
+                <input type="checkbox" id="chk-image-ocr" />
+                <span data-translate-key="imageOcrLabel">OCR immagine</span>
+              </label>
+              <button id="btn-create-audio" class="secondary-btn hidden" type="button" data-translate-key="createAudioButton">
+                Crea File Audio
+              </button>
+              <select id="tts-format-select" class="tts-format-select hidden">
+                <option value="wav" data-translate-key="exportWav">WAV</option>
+                <option value="mp3" data-translate-key="exportMp3">MP3</option>
+              </select>
+            </div>
+            <div class="rag-upload-status">
+              <div id="temp-doc-status" class="status-text" data-translate-key="noFileSelected">Nessun file selezionato.</div>
+              <button
+                id="btn-clear-temp-doc"
+                class="secondary-btn secondary-btn-compact hidden"
+                type="button"
+                data-translate-key="removeFileButton"
+              >
+                Rimuovi file
+              </button>
+            </div>
+            <div id="tts-result-panel" class="tts-result-panel hidden">
+              <audio id="tts-audio-preview" class="hidden" controls></audio>
+              <a
+                id="tts-download-link"
+                class="secondary-btn secondary-btn-compact hidden"
+                data-translate-key="downloadAudioButton"
+                download
+                >Scarica audio</a
+              >
+            </div>
+            <div id="tts-status" class="status-text"></div>
+          </div>
+          <div id="mcp-panel" class="mcp-panel hidden">
+            <div class="mcp-panel-header">
+              <div class="mcp-panel-title" data-translate-key="mcpPanelTitle">Servizi MCP disponibili</div>
+              <button id="btn-refresh-mcp" class="secondary-btn secondary-btn-compact" data-translate-key="mcpRefreshButton">
+                Aggiorna
+              </button>
+            </div>
+            <div id="mcp-services-list" class="mcp-services-list">
+              <div class="mcp-panel-empty" data-translate-key="mcpPanelEmpty">Attiva MCP per vedere i servizi configurati.</div>
+            </div>
+            <div id="mcp-panel-status" class="status-text"></div>
+          </div>
+        </div>
+
+		<!-- SEZIONE RAG: ELENCO DOCUMENTI + AZIONI -->
+		<div id="rag-panel" class="rag-panel hidden">
+		  <div class="rag-header">
+			<div class="rag-title" data-translate-key="ragPanelTitle">Elenco documenti</div>
+			<div class="rag-actions">
+			  <button id="btn-refresh-docs" class="secondary-btn" data-translate-key="ragRefreshButton">
+				Aggiorna elenco
+			  </button>
+			  <button id="btn-reindex" class="secondary-btn" data-translate-key="ragIndexButton">
+				Indicizza documenti
+			  </button>
+			</div>
+		  </div>
+
+		  <div id="rag-docs-list" class="rag-docs-list">
+		    <!-- Riempito da app.js: file realmente presenti in documents/ -->
+		  </div>
+		  <div id="rag-status" class="status-text"></div>
+
+		  <div class="rag-index-panel">
+			<div class="rag-index-title" data-translate-key="ragIndexedDocsTitle">Documenti indicizzati nel RAG</div>
+			<div id="rag-index-list" class="rag-index-list">
+			  <!-- Riempito da app.js: file presenti nell'indice, anche se non più sul disco -->
+			</div>
+			<div class="rag-index-hint" data-translate-key="ragIndexHint">
+			  Tasto destro su un documento per rimuoverlo dall'indice RAG.
+			</div>
+		  </div>
+		</div>
+
+      </section>
+
+      <!-- COLONNA DESTRA: RISPOSTE LLM -->
+	  <section class="chat-output">
+        <div class="output-header">
+          <div class="output-header-main" data-translate-key="outputTitle">
+            Risposte del modello
+          </div>
+          <div id="model-badge" class="model-badge hidden"></div>
+          <div id="output-status" class="status-text output-status"></div>
+          <div id="current-chat-title" class="output-header-subtitle">
+            <!-- Titolo chat attiva -->
+          </div>
+    
+  		  <!-- Barra di stato globale -->
+		  <div id="global-progress" class="progress-bar">
+		    <div class="progress-bar-inner"></div>
+		  </div>
+		</div>
+
+		<div id="editor-toolbar" class="editor-toolbar hidden">
+		  <div class="editor-toolbar-group">
+			  <select id="editor-select-heading" class="editor-select" title="Intestazioni" data-translate-key="editorHeadingTitle" data-translate-attr="title">
+				<option value="p" data-translate-key="editorHeadingBody">Corpo</option>
+				<option value="h1" data-translate-key="editorHeadingTitle">Titolo</option>
+				<option value="h2" data-translate-key="editorHeadingSubtitle">Sottotitolo</option>
+				<option value="h3" data-translate-key="editorHeadingChapter">Capitolo</option>
+				<option value="h4" data-translate-key="editorHeadingSection">Sezione</option>
+			  </select>
+			  <button class="editor-btn" data-command="insertUnorderedList" title="Elenco puntato" data-translate-key="editorListBulleted" data-translate-attr="title">&#x2022;</button>
+			  <button class="editor-btn" data-command="insertOrderedList" title="Elenco numerato" data-translate-key="editorListNumbered" data-translate-attr="title">1.</button>
+			  <button class="editor-btn" data-command="bold" title="Grassetto" data-translate-key="editorBold" data-translate-attr="title"><b>B</b></button>
+			  <button class="editor-btn" data-command="underline" title="Sottolineato" data-translate-key="editorUnderline" data-translate-attr="title"><u>U</u></button>
+			  <button class="editor-btn" data-command="italic" title="Corsivo" data-translate-key="editorItalic" data-translate-attr="title"><i>I</i></button>
+			  <button id="editor-btn-uppercase" class="editor-btn" title="Maiuscolo" data-translate-key="editorUppercase" data-translate-attr="title">A&uarr;</button>
+			  <button id="editor-btn-lowercase" class="editor-btn" title="Minuscolo" data-translate-key="editorLowercase" data-translate-attr="title">a&darr;</button>
+			  <button class="editor-btn" data-command="removeFormat" title="Rimuovi Formato" data-translate-key="editorRemoveFormat" data-translate-attr="title">&times;</button>
+		  </div>
+		  <div class="editor-toolbar-group">
+            <select id="export-format-select" class="editor-select">
+                <option value="html" data-translate-key="exportHtml">HTML</option>
+                <option value="md" data-translate-key="exportMd">Markdown</option>
+                <option value="json" data-translate-key="exportJson">JSON</option>
+                <option value="txt" data-translate-key="exportTxt">Testo Semplice</option>
+                <option value="wav" data-translate-key="exportWav">Audio WAV</option>
+                <option value="mp3" data-translate-key="exportMp3">Audio MP3</option>
+            </select>
+			<button id="btn-export" class="secondary-btn" data-translate-key="exportButton">Esporta</button>
+		  </div>
+		</div>
+		<div id="notepad-editor" class="input-textarea hidden" contenteditable="true" style="flex: 1; min-height: 0;"></div>
+		
+		<div id="messages-container" class="messages-container">
+		  <!-- Messaggi domanda/risposta -->
+		</div>
+
+		<div class="output-footer">
+		  <button id="btn-print-chat" class="secondary-btn" data-translate-key="printChatButton">
+			Stampa chat
+		  </button>
+		  <button id="btn-clear-chat" class="secondary-btn" data-translate-key="clearChatButton">
+			Pulisci chat
+		  </button>
+          <button id="btn-save-chat" class="secondary-btn" data-translate-key="saveChatButton">
+            Salva chat
+          </button>
+          <button id="btn-delete-chat" class="secondary-btn danger-btn" data-translate-key="deleteChatButton">
+            Cancella chat
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <span class="app-footer-left">© 2026 Coworker</span>
+      <a
+        id="footer-help-link"
+        class="app-footer-link"
+        href="docs/help_IT.html"
+        target="_blank"
+        rel="noopener"
+        data-translate-key="footerHelpLink"
+      >
+        Guida
+      </a>
+    </footer>
+  </div>
+
+  <!-- MODAL CONFIGURAZIONE -->
+  <div id="config-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" data-translate-key="configModalTitle">Configurazione</span>
+        <button id="modal-close" class="modal-close-btn" type="button" aria-label="Chiudi" data-translate-key="configModalClose" data-translate-attr="aria-label">×</button>
+      </div>
+      <div id="config-page-stepper" class="config-page-stepper">
+        <!-- Stepper generato da JS -->
+      </div>
+      <div class="modal-body" id="config-body">
+        <div id="config-pages-container" class="config-pages-container">
+          <!-- Contenuto generato da JS -->
+        </div>
+      </div>
+      <div class="config-page-controls">
+        <button id="config-page-prev" class="config-pager-btn" type="button" data-translate-key="configModalPrevPage">‹ Pagina precedente</button>
+        <div id="config-page-indicator" class="config-page-indicator"></div>
+        <button id="config-page-next" class="config-pager-btn" type="button" data-translate-key="configModalNextPage">Pagina successiva ›</button>
+      </div>
+      <div class="modal-footer">
+        <button id="modal-close-bottom" class="primary-btn" data-translate-key="configModalClose">
+          Chiudi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Elementi per la stampa -->
+  <div id="print-header" class="hidden">
+    <img src="logo.jpg" alt="Logo Coworker" />
+    <span id="print-title"></span>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/tts.js"></script>
+  <script src="js/rag.js"></script>
+  <script src="js/websearch.js"></script>
+  <script src="js/mcp.js"></script>
+  <script src="js/notepad.js"></script>
+  <script src="js/graphics.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/llm.js"></script>
+  <script src="js/providers.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

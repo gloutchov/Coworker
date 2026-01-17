@@ -1,0 +1,8 @@
+# Local models and large binaries
+models/
+*.gguf
+.venv/
+lai/.venv311/
+__pycache__/
+*.pyc
+.DS_Store
