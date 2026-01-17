@@ -31,6 +31,7 @@
 - Appendice
   - Descrizione dei modelli LLM utilizzati
   - Come scrivere un prompt efficace
+  - Installazione
   - Glossario dei termini tecnici
 
 ## Introduzione
@@ -321,6 +322,10 @@ macOS (ordine consigliato):
 Cosa fanno gli script di setup (in breve):
 - preparano l'ambiente Python (virtualenv) e installano le dipendenze richieste,
 - scaricano e configurano i componenti locali necessari all'esecuzione dei modelli.
+
+Download modello Coqui (consigliato prima del primo avvio):
+- Avviare lo script di warm-up: `python3 tools/warmup_coqui_tts.py --accept-tos`
+- Questo script scarica in anticipo il modello Coqui TTS per evitare attese al primo utilizzo.
 
 Se su macOS i file `.command` non partono, eseguire da terminale:
 1. Aprire Terminale nella cartella del progetto.

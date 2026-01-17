@@ -456,6 +456,11 @@
               <li>Prepare the Python environment (virtualenv) and install required dependencies.</li>
               <li>Download and configure local components needed to run the models.</li>
             </ul>
+            <p>Coqui model download (recommended before first run):</p>
+            <ul>
+              <li>Run the warm-up script: <code>python3 tools/warmup_coqui_tts.py --accept-tos</code></li>
+              <li>This script pre-downloads the Coqui TTS model to avoid delays on first use.</li>
+            </ul>
             <p>Note: <code>ffmpeg</code> is not included in this repository. Install it separately and make sure it is available on <code>PATH</code> for audio features.</p>
             <p>Recommended installation:</p>
             <ul>
