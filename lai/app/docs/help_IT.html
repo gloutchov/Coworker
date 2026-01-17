@@ -193,6 +193,7 @@
           <a href="#cambio-lingua">Cambio di lingua</a>
           <a href="#manuale">Questo manuale</a>
           <a href="#appendice">Appendice</a>
+          <a href="#installazione">Installazione</a>
         </nav>
 
         <div class="help-content" id="help-content">
@@ -319,7 +320,6 @@
           <section id="configurazione" class="help-section">
             <h2>Configurazione</h2>
             <p>La configurazione permette di adattare Coworker alle proprie esigenze. Le sezioni principali sono:</p>
-            <p>Nota: per le funzioni audio serve <code>ffmpeg</code> disponibile nel <code>PATH</code>.</p>
             <p>Opzioni modificabili dall'utente (principali):</p>
             <ul>
               <li>modelli attivi e modelli LLM personalizzati,</li>
@@ -357,7 +357,6 @@
             </ul>
             <h3>Gestione audio</h3>
             <p>Controlla trascrizione audio da file, trascrizione live da browser, impostazioni e limiti di registrazione.</p>
-            <p>Nota: le funzioni audio richiedono <code>ffmpeg</code> disponibile nel <code>PATH</code>.</p>
             <h3>Sintesi vocale</h3>
             <p>Consente di convertire testi in audio. Disponibile per documenti testuali compatibili.</p>
             <h3>Servizi MCP</h3>
@@ -438,7 +437,7 @@
               <li><strong>Spirito critico</strong>: Coworker e' uno strumento di supporto, non sostituisce la responsabilita decisionale dell'utente.</li>
             </ul>
 
-            <h3>Installazione</h3>
+            <h3 id="installazione">Installazione</h3>
             <p>Prima di avviare il programma e' necessario eseguire gli script di setup.</p>
             <p><strong>Windows</strong>:</p>
             <ol>
@@ -461,7 +460,7 @@
               <li>Avviare lo script di warm-up: <code>python3 tools/warmup_coqui_tts.py --accept-tos</code></li>
               <li>Questo script scarica in anticipo il modello Coqui TTS per evitare attese al primo utilizzo.</li>
             </ul>
-            <p>Nota: <code>ffmpeg</code> non e' incluso nel repository. Va installato separatamente e deve essere disponibile nel <code>PATH</code> per le funzioni audio.</p>
+            <p>Nota: per le funzioni audio serve <code>ffmpeg</code> disponibile nel <code>PATH</code> (non incluso nel repository).</p>
             <p>Installazione consigliata:</p>
             <ul>
               <li>macOS (Homebrew): <code>brew install ffmpeg</code></li>

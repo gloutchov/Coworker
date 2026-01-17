@@ -155,7 +155,6 @@ In questa modalita il modello risponde basandosi **solo** sulle conversazioni sa
 
 ## Configurazione
 La configurazione permette di adattare Coworker alle proprie esigenze. Le sezioni principali sono:
-Nota: per le funzioni audio serve `ffmpeg` disponibile nel `PATH`.
 Opzioni modificabili dall'utente (principali):
 - modelli attivi e modelli LLM personalizzati,
 - cartella documenti e cartella modelli,
@@ -215,7 +214,6 @@ Controlla:
 - trascrizione audio da file,
 - trascrizione live da browser,
 - impostazioni e limiti di registrazione.
-Nota: le funzioni audio richiedono `ffmpeg` disponibile nel `PATH`.
 
 ### Sintesi vocale
 Consente di convertire testi in audio. Disponibile per documenti testuali compatibili.
@@ -327,6 +325,12 @@ Download modello Coqui (consigliato prima del primo avvio):
 - Avviare lo script di warm-up: `python3 tools/warmup_coqui_tts.py --accept-tos`
 - Questo script scarica in anticipo il modello Coqui TTS per evitare attese al primo utilizzo.
 
+Nota: per le funzioni audio serve `ffmpeg` disponibile nel `PATH` (non incluso nel repository).
+Installazione consigliata:
+- macOS (Homebrew): `brew install ffmpeg`
+- Windows (winget): `winget install Gyan.FFmpeg`
+- Windows (Chocolatey): `choco install ffmpeg`
+
 Se su macOS i file `.command` non partono, eseguire da terminale:
 1. Aprire Terminale nella cartella del progetto.
 2. Rendere eseguibili gli script:
@@ -374,9 +378,3 @@ Nota autore: questa app e' stata realizzata in vibe coding.
 
 ## Licenza
 Distribuito sotto licenza Apache 2.0. Vedi `LICENSE`.
-
-Nota: `ffmpeg` non e' incluso nel repository. Va installato separatamente e deve essere disponibile nel `PATH` per le funzioni audio.
-Installazione consigliata:
-- macOS (Homebrew): `brew install ffmpeg`
-- Windows (winget): `winget install Gyan.FFmpeg`
-- Windows (Chocolatey): `choco install ffmpeg`

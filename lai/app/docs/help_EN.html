@@ -193,6 +193,7 @@
           <a href="#language">Language switch</a>
           <a href="#manual">This manual</a>
           <a href="#appendix">Appendix</a>
+          <a href="#installation">Installation</a>
         </nav>
 
         <div class="help-content" id="help-content">
@@ -319,7 +320,6 @@
           <section id="configuration" class="help-section">
             <h2>Configuration</h2>
             <p>Configuration lets you adapt Coworker to your needs. Main sections:</p>
-            <p>Note: audio features require <code>ffmpeg</code> available on <code>PATH</code>.</p>
             <p>User editable options (main):</p>
             <ul>
               <li>active models and custom LLM models,</li>
@@ -438,7 +438,7 @@
               <li><strong>Critical review</strong>: Coworker is a support tool and does not replace user responsibility.</li>
             </ul>
 
-            <h3>Installation</h3>
+            <h3 id="installation">Installation</h3>
             <p>Before starting the program, run the setup scripts.</p>
             <p><strong>Windows</strong>:</p>
             <ol>
@@ -461,7 +461,7 @@
               <li>Run the warm-up script: <code>python3 tools/warmup_coqui_tts.py --accept-tos</code></li>
               <li>This script pre-downloads the Coqui TTS model to avoid delays on first use.</li>
             </ul>
-            <p>Note: <code>ffmpeg</code> is not included in this repository. Install it separately and make sure it is available on <code>PATH</code> for audio features.</p>
+            <p>Note: audio features require <code>ffmpeg</code> available on <code>PATH</code> (not included in this repository).</p>
             <p>Recommended installation:</p>
             <ul>
               <li>macOS (Homebrew): <code>brew install ffmpeg</code></li>
