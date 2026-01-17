@@ -6,3 +6,4 @@ lai/.venv311/
 __pycache__/
 *.pyc
 .DS_Store
+lai/AGENTS.md
