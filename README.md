@@ -1,7 +1,6 @@
 # Coworker - Manuale Utente (IT)
 
-> Documento derivato da `lai/app/docs/help_IT.pdf`.
-> Immagini escluse per motivi di brandizzazione. Testo riorganizzato per GitHub.
+> Questa app è stata realizzata in vibecoding con codex CLI e gemini CLI. Attualmente è da intendersi come alpha funzionante. Non è stata fatta ottimizzazione, pulizia di codice orfano, interventi di sicurezza, e molto altro ancora...
 
 ## Sommario
 - Introduzione
