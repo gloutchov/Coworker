@@ -1,3 +1,33 @@
+# Premessa
+Non sono un esperto nella scrittura di codice. Per lo meno così mi vedo. Ma non sono neppure una persona che ha scoperto che chatGPT può fare APP e subito ha avuto l'ambizione di fargli fare l'applicazione must have che tutti desiderano da una vita. Coworker nasce da una necessità vera, e molto personale. Il desiderio di sperimentare, di vedere cosa si può ottenere con un CLI installato (in realtà 2 CLI differenti: Codex e Gemini), e semplicemente fare esperienza. Ho voluto però motivarmi in questo percorso, e cercare di avere come obiettivo un tool che potesse avere la sua utilità. Coworker vuole essere un tool AI da tenere aperto sul proprio computer. Lo volevo che funzionasse su un pc da ufficio, un portatile senza chissà quale scheda grafica e chissà quale processore, figurarsi poi se è presente una engine per intelligenza artificiale, o un ram come se piovesse. Mi sono dato come target il portatile dell'azienda, con un i7 dell'anno scorso, una scheda video integrata, e 16Gb di Ram, e il Mac Mini M1 con 8Gb di Ram che ho a casa.
+Il programma è fondamentalmente un chatbot. Però non usa un singolo modello llm. Ne usa diversi. Li trovate più avanti in questo documento. Ho comunque scelto modelli da 3B e 4B. Uno che 'conosce bene le lingue' (Qwen 2.5), uno che ha capacità di visione e OCR (Gemma), uno capace di ragionamento (Qwen 3), e uno bravino con la logica (Phi). E' inoltre presente Whisper per le trascrizioni, e Coqui per la trasformazione di testo in file audio.
+Qual è lo scopo di tutto ciò:
+1) Avere un chatbot che risponda alle domande prendendo le informazioni solo dai documenti presenti in una cartella specifica (definita dall'utente). Questi documenti vengono sottoposti a RAG e conservati su un database.
+2) Poter caricare anche un documento al volo - usa e getta - che non rimanga nel database, e usare il chatbot per estrarne dati e informazioni.
+3) Analizzare documenti di testo, word, excel, pdf, immagini (tramite OCR), e audio.
+4) Avere un notepad dove prendere appunti, e inserire contenuti generati dalla AI in base alle domande che gli facciamo.
+5) Poter trascrivere files audio, anche in live (riunioni teams, ma anche testi dettati al chatbot).
+6) Poter fare brainstorming.
+7) Creare diagrammi di flusso, mappe mentali, e schemi di vario tipo, partendo da chat, ma anche dal contenuto dei documenti caricati.
+8) Poter interrogare le vecchie chat.
+9) Poter accedere a server MCP.
+10) Poter accedere a Wikipedia.
+A parte l'accesso a Wikipedia, e ai server MCP, il sistema funziona completamente in locale. I modelli sono piccoli, locali, e vengono caricati in memoria a seconda delle richieste che vengono fatte. Tutto ciò che viene fatto con Coworker rimane sul pc in cui è installato, sul suo database, al punto che può funzionare anche senza connessione internet. OK, l'accesso a wikipedia viene utile per andare oltre alla knowledge base dei modelli, che hanno una data limite, ma in linea di massima, per il lavoro, se ne potrebbe anche fare a meno.  
+L'interfaccia è spartana, utile allo scopo, ma sicuramente non ci ho passato le notti nel darle un bell'aspetto.
+Il mio scopo era capire cosa potevo ottenere con i CLI a mia disposizione. E credo anche sia giusto spiegare come questa app sia nata, come abbia usato i CLI che ho citato a inizio post.
+Molta parte del codice è stata sviluppata con Gemini CLI, e 'aggiustata' da codex CLI. Quando ho iniziato a lavorarci codex si piantava spesso, andava in crash, per cui non mi fidavo molto di ciò che 'faceva'. Gemini, d'altro canto, ha fatto gran parte del lavoro senza problemi. Solo in alcune situazioni non è riuscito a risolve bug e problematiche. Lì è intervenuto codex, correggendo ciò che Gemini trovava ostico. Poi Codex, con l'avvento di GPT5, ha cambiato registro ed è diventato davvero un ottimo inquisitore. In pratica gli ho fatto fare tutto il lavoro di debug, e di ottimizzazione.
+Ora Coworker funziona correttamente, sia su PC, sia su Mac. Su PC ha prestazioni leggermente migliori grazie alla maggiore quantità di memoria, ma se su Mac si installano prima i requirements per Mac poi il llama_cpp specifico per i chip Apple, si ha una bella ottimizzazione. Certo, avere meno ram a disposizione è sempre un limite... Anche perché Coworker è pensato per essere usato e attivo su un pc dove girano altri programmi, magari 'roba' impegnativa che ruba risorse preziose. Ed è anche per questo che ho favorito modelli davvero piccolini... Così da lasciare ram libera per altri strumenti di lavoro che solitamente sono usati in ufficio.
+E' uno strumento che cambia la vita? No! Per lo meno non credo.
+Dal momento che l'ho 'consolidato', al momento in cui ho pensato di rilasciarlo, è arrivato persino OpenClaw... Per cui prendetelo proprio come 'esercizio'.
+Cosa manca? Beh...
+1) Va messo in sicurezza, innanzi tutto. Avevo anche iniziato il lavoro... Ma altre attività mi hanno costretto a interrompere lo studio.
+2) Va ripulito da eventuale codice orfano (Gemini CLI è bravo nel seminarne, Codex è bravo nell'identificarlo... Ma non ho investigato in modo estremo, e qualcosa potrebbe essere rimasto).
+3) Un coder esperto potrebbe anche spingersi a ottimizzarlo. Io mi sono fermato al "basta che funziona", e al "basta che sia usabile". Si tratta pur sempre di un esercizio fatto nei ritagli di tempo.
+4) ... Lascio agli esperti ulteriori punti a questa lista.
+Cosa mi ha dato questo studio? Intanto ho capito pregi e limiti dei due CLI che ho utilizzato. Ora li sto persino confrontando con Claude Code, e con Mistral Vibe. E devo dire che Claude Code è sorprendente... per come finisca il credito di token velocemente. Lo trovo quasi inusabile (per le mie risorse e necessità). Mistral se la cava bene, alla stregua di Gemini CLI. Ma alla fine i bug più insidiosi me li risolve sempre Codex.
+Questo è quanto. Spero che questo rilascio possa in un qualche modo essere d'interesse.
+
+
 # Coworker - Manuale Utente (IT)
 
 > Questa app è stata realizzata in vibecoding con codex CLI e gemini CLI. Attualmente è da intendersi come alpha funzionante. Non è stata fatta ottimizzazione, pulizia di codice orfano, interventi di sicurezza, e molto altro ancora...
