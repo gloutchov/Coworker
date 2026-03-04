@@ -23,7 +23,7 @@ Cosa manca? Beh...
 1) Va messo in sicurezza, innanzi tutto. Avevo anche iniziato il lavoro... Ma altre attività mi hanno costretto a interrompere lo studio.
 2) Va ripulito da eventuale codice orfano (Gemini CLI è bravo nel seminarne, Codex è bravo nell'identificarlo... Ma non ho investigato in modo estremo, e qualcosa potrebbe essere rimasto).
 3) Un coder esperto potrebbe anche spingersi a ottimizzarlo. Io mi sono fermato al "basta che funziona", e al "basta che sia usabile". Si tratta pur sempre di un esercizio fatto nei ritagli di tempo.
-4) ... Lascio agli esperti ulteriori punti a questa lista.
+... Lascio agli esperti ulteriori punti a questa lista.
 Cosa mi ha dato questo studio? Intanto ho capito pregi e limiti dei due CLI che ho utilizzato. Ora li sto persino confrontando con Claude Code, e con Mistral Vibe. E devo dire che Claude Code è sorprendente... per come finisca il credito di token velocemente. Lo trovo quasi inusabile (per le mie risorse e necessità). Mistral se la cava bene, alla stregua di Gemini CLI. Ma alla fine i bug più insidiosi me li risolve sempre Codex.
 Questo è quanto. Spero che questo rilascio possa in un qualche modo essere d'interesse.
 
