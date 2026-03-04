@@ -14,17 +14,22 @@ Qual è lo scopo di tutto ciò:
 10) Poter accedere a Wikipedia.
 
 A parte l'accesso a Wikipedia, e ai server MCP, il sistema funziona completamente in locale. I modelli sono piccoli, locali, e vengono caricati in memoria a seconda delle richieste che vengono fatte. Tutto ciò che viene fatto con Coworker rimane sul pc in cui è installato, sul suo database, al punto che può funzionare anche senza connessione internet. OK, l'accesso a wikipedia viene utile per andare oltre alla knowledge base dei modelli, che hanno una data limite, ma in linea di massima, per il lavoro, se ne potrebbe anche fare a meno.  
+
 L'interfaccia è spartana, utile allo scopo, ma sicuramente non ci ho passato le notti nel darle un bell'aspetto.
+
 Il mio scopo era capire cosa potevo ottenere con i CLI a mia disposizione. E credo anche sia giusto spiegare come questa app sia nata, come abbia usato i CLI che ho citato a inizio post.
+
 Molta parte del codice è stata sviluppata con Gemini CLI, e 'aggiustata' da codex CLI. Quando ho iniziato a lavorarci codex si piantava spesso, andava in crash, per cui non mi fidavo molto di ciò che 'faceva'. Gemini, d'altro canto, ha fatto gran parte del lavoro senza problemi. Solo in alcune situazioni non è riuscito a risolve bug e problematiche. Lì è intervenuto codex, correggendo ciò che Gemini trovava ostico. Poi Codex, con l'avvento di GPT5, ha cambiato registro ed è diventato davvero un ottimo inquisitore. In pratica gli ho fatto fare tutto il lavoro di debug, e di ottimizzazione.
+
 Ora Coworker funziona correttamente, sia su PC, sia su Mac. Su PC ha prestazioni leggermente migliori grazie alla maggiore quantità di memoria, ma se su Mac si installano prima i requirements per Mac poi il llama_cpp specifico per i chip Apple, si ha una bella ottimizzazione. Certo, avere meno ram a disposizione è sempre un limite... Anche perché Coworker è pensato per essere usato e attivo su un pc dove girano altri programmi, magari 'roba' impegnativa che ruba risorse preziose. Ed è anche per questo che ho favorito modelli davvero piccolini... Così da lasciare ram libera per altri strumenti di lavoro che solitamente sono usati in ufficio.
+
 E' uno strumento che cambia la vita? No! Per lo meno non credo.
 Dal momento che l'ho 'consolidato', al momento in cui ho pensato di rilasciarlo, è arrivato persino OpenClaw... Per cui prendetelo proprio come 'esercizio'.
 
 Cosa manca? Beh...
-1) Va messo in sicurezza, innanzi tutto. Avevo anche iniziato il lavoro... Ma altre attività mi hanno costretto a interrompere lo studio.
-2) Va ripulito da eventuale codice orfano (Gemini CLI è bravo nel seminarne, Codex è bravo nell'identificarlo... Ma non ho investigato in modo estremo, e qualcosa potrebbe essere rimasto).
-3) Un coder esperto potrebbe anche spingersi a ottimizzarlo. Io mi sono fermato al "basta che funziona", e al "basta che sia usabile". Si tratta pur sempre di un esercizio fatto nei ritagli di tempo.
+a) Va messo in sicurezza, innanzi tutto. Avevo anche iniziato il lavoro... Ma altre attività mi hanno costretto a interrompere lo studio.
+b) Va ripulito da eventuale codice orfano (Gemini CLI è bravo nel seminarne, Codex è bravo nell'identificarlo... Ma non ho investigato in modo estremo, e qualcosa potrebbe essere rimasto).
+c) Un coder esperto potrebbe anche spingersi a ottimizzarlo. Io mi sono fermato al "basta che funziona", e al "basta che sia usabile". Si tratta pur sempre di un esercizio fatto nei ritagli di tempo.
 
 Lascio agli esperti ulteriori punti a questa lista.
 Cosa mi ha dato questo studio? Intanto ho capito pregi e limiti dei due CLI che ho utilizzato. Ora li sto persino confrontando con Claude Code, e con Mistral Vibe. E devo dire che Claude Code è sorprendente... per come finisca il credito di token velocemente. Lo trovo quasi inusabile (per le mie risorse e necessità). Mistral se la cava bene, alla stregua di Gemini CLI. Ma alla fine i bug più insidiosi me li risolve sempre Codex.
