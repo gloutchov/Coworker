@@ -27,9 +27,9 @@ E' uno strumento che cambia la vita? No! Per lo meno non credo.
 Dal momento che l'ho 'consolidato', al momento in cui ho pensato di rilasciarlo, è arrivato persino OpenClaw... Per cui prendetelo proprio come 'esercizio'.
 
 Cosa manca? Beh...
-a) Va messo in sicurezza, innanzi tutto. Avevo anche iniziato il lavoro... Ma altre attività mi hanno costretto a interrompere lo studio.
-b) Va ripulito da eventuale codice orfano (Gemini CLI è bravo nel seminarne, Codex è bravo nell'identificarlo... Ma non ho investigato in modo estremo, e qualcosa potrebbe essere rimasto).
-c) Un coder esperto potrebbe anche spingersi a ottimizzarlo. Io mi sono fermato al "basta che funziona", e al "basta che sia usabile". Si tratta pur sempre di un esercizio fatto nei ritagli di tempo.
+- Va messo in sicurezza, innanzi tutto. Avevo anche iniziato il lavoro... Ma altre attività mi hanno costretto a interrompere lo studio.
+- Va ripulito da eventuale codice orfano (Gemini CLI è bravo nel seminarne, Codex è bravo nell'identificarlo... Ma non ho investigato in modo estremo, e qualcosa potrebbe essere rimasto).
+- Un coder esperto potrebbe anche spingersi a ottimizzarlo. Io mi sono fermato al "basta che funziona", e al "basta che sia usabile". Si tratta pur sempre di un esercizio fatto nei ritagli di tempo.
 
 Lascio agli esperti ulteriori punti a questa lista.
 Cosa mi ha dato questo studio? Intanto ho capito pregi e limiti dei due CLI che ho utilizzato. Ora li sto persino confrontando con Claude Code, e con Mistral Vibe. E devo dire che Claude Code è sorprendente... per come finisca il credito di token velocemente. Lo trovo quasi inusabile (per le mie risorse e necessità). Mistral se la cava bene, alla stregua di Gemini CLI. Ma alla fine i bug più insidiosi me li risolve sempre Codex.
