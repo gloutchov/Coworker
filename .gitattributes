@@ -1,0 +1,31 @@
+* text=auto
+
+# Windows launcher scripts
+*.bat text eol=crlf
+
+# Unix/macOS scripts
+*.command text eol=lf
+*.sh text eol=lf
+
+# Source and config files
+*.py text eol=lf
+*.js text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary assets and local data
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.db binary
+*.wav binary
+*.bin binary
+*.gguf binary
