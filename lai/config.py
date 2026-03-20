@@ -38,11 +38,11 @@ LLM_MODEL_CATALOG = [
 ]
 
 # Abilita la modifica dei modelli LLM via UI (ON/OFF)
-_EDIT_MODELS_DEFAULT = os.environ.get("EDIT_MODELS", "OFF").strip().upper()
+_EDIT_MODELS_DEFAULT = os.environ.get("EDIT_MODELS", "ON").strip().upper()
 EDIT_MODELS = _EDIT_MODELS_DEFAULT if _EDIT_MODELS_DEFAULT in {"ON", "OFF"} else "OFF"
 
 # Abilita la modifica del percorso modelli via UI (ON/OFF)
-_EDIT_MODEL_POSITION_DEFAULT = os.environ.get("EDIT_MODEL_POSITION", "OFF").strip().upper()
+_EDIT_MODEL_POSITION_DEFAULT = os.environ.get("EDIT_MODEL_POSITION", "ON").strip().upper()
 EDIT_MODEL_POSITION = (
     _EDIT_MODEL_POSITION_DEFAULT
     if _EDIT_MODEL_POSITION_DEFAULT in {"ON", "OFF"}
