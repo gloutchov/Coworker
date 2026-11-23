@@ -1,6 +1,6 @@
 # Premessa
 
-> **Fine manutenzione.** Il progetto non è più mantenuto. Le dipendenze fissate in `lai/requirements_*_311.txt` hanno vulnerabilità note, alcune critiche (in particolare torch, certifi, anyio, h11, transformers e urllib3). Chi vuole usare Coworker deve aggiornarle in proprio. Situazione aggiornata: [scheda Security](https://github.com/gloutchov/Coworker/security).
+> **Fine manutenzione.** Il progetto non è più mantenuto. Le dipendenze fissate in `lai/requirements_*_311.txt` hanno vulnerabilità note, alcune critiche (torch, certifi, anyio, h11) e molte alte (tra cui transformers e urllib3). Chi vuole usare Coworker deve aggiornarle in proprio. Situazione aggiornata: [scheda Security](https://github.com/gloutchov/Coworker/security).
 >
 > *This project is no longer maintained; the pinned dependencies have known vulnerabilities, some critical, and anyone who uses it must update them. [Security](https://github.com/gloutchov/Coworker/security).*
 
